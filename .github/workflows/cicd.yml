@@ -33,7 +33,7 @@ jobs:
     - name: Dialyzer
       run: rebar3 dialyzer
     - name: Proper Tests
-      run: rebar3 proper --regressions
+      run: rebar3 as test do compile, proper --regressions
     - name: Run Tests
       run: rebar3 ct -c
     - name: Run Unit Tests
@@ -61,8 +61,10 @@ jobs:
       run: rebar3 xref
     - name: Dialyzer
       run: rebar3 dialyzer
+    - name: Compile Tests
+      run: rebar3 as test compile
     - name: Proper Tests
-      run: rebar3 proper --regressions
+      run: rebar3 as test proper --regressions
     - name: Run Tests
       run: rebar3 ct -c
     - name: Run Unit Tests
