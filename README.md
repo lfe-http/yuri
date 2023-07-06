@@ -45,7 +45,7 @@ Copyright © 2023, Duncan McGreggor <oubiwann@gmail.com>.
 
 [logo]: priv/images/yuri-small.jpg
 [logo-large]: priv/images/yuri.jpg
-[gh-actions-badge]: https://github.com/lfex/yuri/workflows/build/badge.svg
+[gh-actions-badge]: https://github.com/lfex/yuri/actions/workflows/cicd.yml/badge.svg
 [gh-actions]: https://github.com/lfex/yuri/actions
 [lfe]: https://github.com/lfe/lfe
 [lfe badge]: https://img.shields.io/badge/lfe-2.1-blue.svg
