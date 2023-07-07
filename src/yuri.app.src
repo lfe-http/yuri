@@ -1,6 +1,6 @@
 {application, 'yuri', [
-    {description, "An LFE library"},
-    {vsn, "0.1.0"},
+    {description, "An LFE library for working with URIs"},
+    {vsn, "0.1.1"},
     {registered, []},
     {applications, [
         kernel,
