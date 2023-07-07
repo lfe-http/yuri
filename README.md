@@ -49,7 +49,7 @@ Copyright © 2023, Duncan McGreggor <oubiwann@gmail.com>.
 [gh-actions]: https://github.com/lfex/yuri/actions
 [lfe]: https://github.com/lfe/lfe
 [lfe badge]: https://img.shields.io/badge/lfe-2.1-blue.svg
-[erlang badge]: https://img.shields.io/badge/erlang-20%20to%2026-blue.svg
+[erlang badge]: https://img.shields.io/badge/erlang-21%20to%2026-blue.svg
 [version]: https://github.com/lfex/yuri/blob/master/.github/workflows/cicd.yml
 [github tags]: https://github.com/lfex/yuri/tags
 [github tags badge]: https://img.shields.io/github/tag/ORG/yuri.svg

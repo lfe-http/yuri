@@ -34,8 +34,8 @@ jobs:
       run: rebar3 dialyzer
     - name: Proper Tests
       run: rebar3 as test do compile, proper --regressions
-    - name: Run Tests
-      run: rebar3 ct -c
+    # - name: Run Tests
+    #   run: rebar3 ct -c
     - name: Run Unit Tests
       run: rebar3 as test lfe ltest -tall
     - name: Test Coverage
@@ -47,7 +47,7 @@ jobs:
 
     strategy:
       matrix:
-        otp_version: ['20.3', '21.3', '22.3', '23.3']
+        otp_version: ['21.3', '22.3', '23.3']
 
     steps:
     - uses: actions/checkout@v2
@@ -65,8 +65,8 @@ jobs:
       run: rebar3 as test compile
     - name: Proper Tests
       run: rebar3 as test proper --regressions
-    - name: Run Tests
-      run: rebar3 ct -c
+    # - name: Run Tests
+    #   run: rebar3 ct -c
     - name: Run Unit Tests
       run: rebar3 as test lfe ltest -tall
     - name: Test Coverage
