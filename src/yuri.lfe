@@ -3,18 +3,21 @@
    (encode 1) (encode 2))
   (export
    (parse 1)
-   (quote 1) (quote 2)))
+   ;; TODO: we can enable these once the minium Erlang version is 25
+   ;; (quote 1) (quote 2)
+   ))
 
 ;;; uri_string library wrappers
 
 (defun parse (uri)
   (uri_string:parse uri))
 
-(defun quote (uri)
-  (uri_string:quote uri))
+;; TODO: we can enable these once the minium Erlang version is 25
+;; (defun quote (uri)
+;;   (uri_string:quote uri))
 
-(defun quote (uri safe)
-  (uri_string:quote uri safe))
+;; (defun quote (uri safe)
+;;   (uri_string:quote uri safe))
 
 ;; Code for this was converted from Erlang written by Renato Albano, CapnKernul
 ;; (Github user), erlangexamples.com, and the erlang docs for the edoc lib.

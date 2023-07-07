@@ -16,7 +16,7 @@ This library is serves a handful of purposes:
 * provides additional parsing of URI data on top of what the Erlang `uri_string` library already does;
 * does conversions for bytestring URIs
 * provides a URI encode function
-* wraps some basic `uri_string` functions (like `parse` and `quote`) for convenience
+* wraps some basic `uri_string` functions (like `parse`) for convenience
 
 ## Build [&#x219F;](#table-of-contents)
 
