@@ -11,7 +11,12 @@
 
 ## About [&#x219F;](#table-of-contents)
 
-TBD
+This library is serves a handful of purposes:
+
+* provides additional parsing of URI data on top of what the Erlang `uri_string` library already does;
+* does conversions for bytestring URIs
+* provides a URI encode function
+* wraps some basic `uri_string` functions (like `parse` and `quote`) for convenience
 
 ## Build [&#x219F;](#table-of-contents)
 
@@ -19,16 +24,10 @@ TBD
 rebar3 lfe compile
 ```
 
-# Start the Project REPL [&#x219F;](#table-of-contents)
-
-```shell
-rebar3 lfe repl
-```
-
 # Tests [&#x219F;](#table-of-contents)
 
 ```shell
-rebar3 as test lfe test
+rebar3 as test ltest
 ```
 
 ## Usage [&#x219F;](#table-of-contents)

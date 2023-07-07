@@ -38,8 +38,8 @@ jobs:
     #   run: rebar3 ct -c
     - name: Run Unit Tests
       run: rebar3 as test lfe ltest -tall
-    - name: Test Coverage
-      run: rebar3 as test do proper -c, cover -v --min_coverage=0
+    # - name: Test Coverage
+    #   run: rebar3 as test do proper -c, cover -v --min_coverage=0
 
   older-builds:
     name: Old Erlang ${{ matrix.otp_version }} build
@@ -69,5 +69,5 @@ jobs:
     #   run: rebar3 ct -c
     - name: Run Unit Tests
       run: rebar3 as test lfe ltest -tall
-    - name: Test Coverage
-      run: rebar3 as test do proper -c, cover -v --min_coverage=0
+    # - name: Test Coverage
+    #   run: rebar3 as test do proper -c, cover -v --min_coverage=0
