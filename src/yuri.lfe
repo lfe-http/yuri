@@ -9,11 +9,14 @@
 
 ;;; uri_string library wrappers
 
-(defun parse (uri)
-  (maps:from_list
-   (lists:map
-    #'v->bin/1
-    (maps:to_list (uri_string:parse uri)))))
+(defun parse
+  ((uri) (when (is_binary uri))
+   (parse (binary_to_list uri)))
+  ((uri)
+   (maps:from_list
+    (lists:map
+     #'v->bin/1
+     (maps:to_list (uri_string:parse uri))))))
 
 ;; TODO: we can enable these once the minium Erlang version is 25
 ;; (defun quote (uri)
