@@ -10,7 +10,10 @@
 ;;; uri_string library wrappers
 
 (defun parse (uri)
-  (uri_string:parse uri))
+  (maps:from_list
+   (lists:map
+    #'v->bin/1
+    (maps:to_list (uri_string:parse uri)))))
 
 ;; TODO: we can enable these once the minium Erlang version is 25
 ;; (defun quote (uri)
@@ -104,3 +107,13 @@
 
 (defun escape-byte (char)
   (normalise-hex (hex-octet char)))
+
+(defun v->bin
+  ((`#(,k ,v)) (when (is_binary v))
+   `#(,k ,v))
+  ((`#(,k ,v)) (when (is_list v))
+   (v->bin `#(,k ,(list_to_binary v))))
+  ((`#(,k ,v)) (when (is_atom v))
+   (v->bin `#(,k ,(atom_to_list v))))
+  ((`#(,k ,v)) (when (is_integer v))
+   (v->bin `#(,k ,(integer_to_list v 10)))))

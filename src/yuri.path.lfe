@@ -31,7 +31,7 @@
            (yuri:encode r `#m(as-bytes true)))))
      (split-path path))))
  ((yuri-data) (when (is_map yuri-data))
-  (->segments (maps:get 'path yuri-data ""))))
+  (->segments (maps:get 'path yuri-data #""))))
 
 
 ;;; Private functions
