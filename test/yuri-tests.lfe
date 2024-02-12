@@ -65,3 +65,64 @@
             (yuri:encode #"42 a@stuff" #m(as-bytes true)))
   (is-equal #"alice%3aroberts%40host"
             (yuri:encode #"alice:roberts@host" #m(as-bytes true))))
+
+(deftest parse-host
+  (is-equal '(#(fragment #"")
+              #(host #"example.com")
+              #(path #"")
+              #(port #"")
+              #(query #"")
+              #(scheme #"http")
+              #(userinfo #""))
+            (lists:sort (yuri:parse-to-list "http://example.com"))))
+
+(deftest parse-host-with-user
+  (is-equal '(#(fragment #"")
+              #(host #"example.com")
+              #(path #"")
+              #(port #"")
+              #(query #"")
+              #(scheme #"http")
+              #(userinfo #"alice.roberts:sekr1t"))
+            (lists:sort (yuri:parse-to-list "http://alice.roberts:sekr1t@example.com"))))
+
+(deftest parse-host-with-fragment
+  (is-equal '(#(fragment #"start")
+              #(host #"example.com")
+              #(path #"/")
+              #(port #"")
+              #(query #"")
+              #(scheme #"http")
+              #(userinfo #""))
+            (lists:sort (yuri:parse-to-list "http://example.com/#start"))))
+
+(deftest parse-host-with-port
+  (is-equal '(#(fragment #"")
+              #(host #"example.com")
+              #(path #"")
+              #(port #"8080")
+              #(query #"")
+              #(scheme #"http")
+              #(userinfo #""))
+            (lists:sort (yuri:parse-to-list "http://example.com:8080"))))
+
+(deftest parse-host-with-query
+  (is-equal '(#(fragment #"")
+              #(host #"example.com")
+              #(path #"")
+              #(port #"")
+              #(query #"a=1&b=2")
+              #(scheme #"http")
+              #(userinfo #""))
+            (lists:sort (yuri:parse-to-list "http://example.com?a=1&b=2"))))
+
+(deftest parse-host-with-all
+  (is-equal '(#(fragment #"start")
+              #(host #"example.com")
+              #(path #"/a/b/c")
+              #(port #"8080")
+              #(query #"a=1&b=2")
+              #(scheme #"http")
+              #(userinfo #"alice.roberts:sekr1t"))
+            (lists:sort (yuri:parse-to-list "http://alice.roberts:sekr1t@example.com:8080/a/b/c?a=1&b=2#start"))))
+

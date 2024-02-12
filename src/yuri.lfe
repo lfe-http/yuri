@@ -2,10 +2,22 @@
   (export
    (encode 1) (encode 2))
   (export
+   (new 0))
+  (export
    (parse 1)
+   (parse-to-list 1)
    ;; TODO: we can enable these once the minium Erlang version is 25
    ;; (quote 1) (quote 2)
    ))
+
+(defun new ()
+  `#m(fragment #""
+      host #""
+      path #""
+      port #""
+      query #""
+      scheme #""
+      userinfo #""))
 
 ;;; uri_string library wrappers
 
@@ -13,10 +25,15 @@
   ((uri) (when (is_binary uri))
    (parse (binary_to_list uri)))
   ((uri)
-   (maps:from_list
-    (lists:map
+   (maps:from_list (parse-to-list uri))))
+
+
+(defun parse-to-list (uri)
+  (lists:map
      #'v->bin/1
-     (maps:to_list (uri_string:parse uri))))))
+     (maps:to_list
+       (maps:merge (new)
+                   (uri_string:parse uri)))))
 
 ;; TODO: we can enable these once the minium Erlang version is 25
 ;; (defun quote (uri)
