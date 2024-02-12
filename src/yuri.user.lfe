@@ -14,7 +14,28 @@
   (->parts (mref parsed 'userinfo)))
 
 (defun parse (parsed)
- (let ((`(,user ,password) (parsed->parts parsed)))
+ (_parse (parsed->parts parsed)))
+
+(defun _parse
+ ((`())
+  `#m(user #""
+      password #""))
+ ((`(#""))
+  `#m(user #""
+      password #""))
+ ((`(,user))
+  `#m(user ,user
+      password #""))
+ ((`(#"" #""))
+  `#m(user #""
+      password #""))
+ ((`(,user #""))
+  `#m(user ,user
+      password #""))
+ ((`(#"" ,password))
+  `#m(user #""
+      password ,password))
+ ((`(,user ,password))
   `#m(user ,user
       password ,password)))
 
