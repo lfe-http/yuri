@@ -34,11 +34,8 @@ rebar3 as test ltest
 
 ```lisp
 lfe> (set parsed (yuri:parse "https://example.tld/some/path?a=1&b=2#name"))
-#M(fragment #"name"
-   host #"example.tld"
-   path #"/some/path"
-   query #"a=1&b=2"
-   scheme #"https")
+#M(port #"" scheme #"https" path #"/some/path" host #"example.tld"
+   userinfo #"" query #"a=1&b=2" fragment #"name")
 
 lfe> (yuri.path:->segments parsed)
 (#"some" #"path")
