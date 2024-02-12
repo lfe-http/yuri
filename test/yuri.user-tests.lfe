@@ -13,3 +13,11 @@
                   "http://alice.roberts:sekr1t@example.com:8080/a/b/c?a=1&b=2#start")))
     (is-equal '(#"alice.roberts" #"sekr1t")
               (yuri.user:parsed->parts parsed))))
+
+(deftest parse-to-list
+  (let ((parsed (yuri:parse
+                  "http://alice.roberts:sekr1t@example.com:8080/a/b/c?a=1&b=2#start")))
+    (is-equal '(#(user #"alice.roberts")
+                #(password #"sekr1t"))
+              (yuri.user:parse-to-list parsed))))
+

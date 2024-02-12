@@ -33,9 +33,9 @@ rebar3 as test ltest
 ## Usage [&#x219F;](#table-of-contents)
 
 ```lisp
-lfe> (set parsed (yuri:parse "https://example.tld/some/path?a=1&b=2#name"))
+lfe> (set parsed (yuri:parse "https://alice.roberts:sekr1t@example.tld/some/path?a=1&b=2#name"))
 #M(port #"" scheme #"https" path #"/some/path" host #"example.tld"
-   userinfo #"" query #"a=1&b=2" fragment #"name")
+   userinfo #"alice.roberts:sekr1t" query #"a=1&b=2" fragment #"name")
 
 lfe> (yuri.path:->segments parsed)
 (#"some" #"path")
@@ -48,6 +48,11 @@ lfe> (set query (yuri.query:parse parsed))
 #M(#"a" #"1" #"b" #"2")
 lfe> (mref query #"b")
 #"2"
+
+lfe> (set userinfo (yuri.user:parse parsed))
+#M(user #"alice.roberts" password #"sekr1t")
+lfe> (mref userinfo 'user)
+#"alice.roberts"
 ```
 
 ## License [&#x219F;](#table-of-contents)
