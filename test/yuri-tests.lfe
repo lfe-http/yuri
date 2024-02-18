@@ -126,3 +126,83 @@
               #(userinfo #"alice.roberts:sekr1t"))
             (lists:sort (yuri:parse-to-list "http://alice.roberts:sekr1t@example.com:8080/a/b/c?a=1&b=2#start"))))
 
+(deftest format-empty
+  (is-equal ":"
+           (lists:flatten (yuri:format (yuri:new)))))
+
+(deftest format-with-host
+  (let ((parsed #m(fragment #""
+                 host #"example.com"
+                 path #""
+                 port #""
+                 query #""
+                 scheme #"http"
+                 userinfo #"")))
+    (is-equal "http://example.com"
+             (lists:flatten (yuri:format parsed)))))
+
+(deftest format-with-user
+  (let ((parsed #m(fragment #""
+                 host #"example.com"
+                 path #""
+                 port #""
+                 query #""
+                 scheme #"http"
+                 userinfo #"alice.roberts:sekr1t")))
+    (is-equal "http://alice.roberts:sekr1t@example.com"
+             (lists:flatten (yuri:format parsed)))))
+
+(deftest format-with-fragment
+  (let ((parsed #m(fragment #"start"
+                 host #"example.com"
+                 path #""
+                 port #""
+                 query #""
+                 scheme #"http"
+                 userinfo #"")))
+    (is-equal "http://example.com#start"
+             (lists:flatten (yuri:format parsed)))))
+
+(deftest format-with-port
+  (let ((parsed #m(fragment #""
+                 host #"example.com"
+                 path #""
+                 port #"5099"
+                 query #""
+                 scheme #"http"
+                 userinfo #"")))
+    (is-equal "http://example.com:5099"
+             (lists:flatten (yuri:format parsed)))))
+
+(deftest format-with-query
+  (let ((parsed #m(fragment #""
+                 host #"example.com"
+                 path #""
+                 port #""
+                 query #"a=1&b=2"
+                 scheme #"http"
+                 userinfo #"")))
+    (is-equal "http://example.com?a=1&b=2"
+             (lists:flatten (yuri:format parsed)))))
+
+(deftest format-with-all
+  (let ((parsed #m(fragment #"start"
+                 host #"example.com"
+                 path #"/a/b/c"
+                 port #"5099"
+                 query #"a=1&b=2"
+                 scheme #"http"
+                 userinfo #"alice.roberts:sekr1t")))
+    (is-equal "http://alice.roberts:sekr1t@example.com:5099/a/b/c?a=1&b=2#start"
+             (lists:flatten (yuri:format parsed)))))
+
+(deftest clean
+  (let ((parsed #m(fragment #"start"
+                 host #"example.com"
+                 path #"/a/b/c"
+                 port #"5099"
+                 query #"a=1&b=2"
+                 scheme #"http"
+                 userinfo #"alice.roberts:sekr1t")))
+    (is-equal "http://example.com:5099/a/b/c?a=1&b=2#start"
+             (lists:flatten (yuri:format (yuri:clean parsed))))))

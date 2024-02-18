@@ -4,6 +4,8 @@
   (export
    (new 0))
   (export
+   (clean 1)
+   (format 1)
    (parse 1)
    (parse-to-list 1)
    ;; TODO: we can enable these once the minium Erlang version is 25
@@ -18,6 +20,28 @@
       query #""
       scheme #""
       userinfo #""))
+
+(defun clean (parsed)
+  (mupd parsed 'userinfo #""))
+
+(defun format
+  "URI = scheme ':' ['//' authority] path ['?' query] ['#' fragment]
+   authority = [userinfo '@'] host [':' port]
+  "
+  ((`#m(fragment ,fr
+       host ,ho
+       path ,pa
+       port ,po
+       query ,qu
+       scheme ,sc
+       userinfo ,ui))
+   (let* ((po (if (== #"" po) po (io_lib:format ":~s" `(,po))))
+         (ui (if (== #"" ui) ui (io_lib:format "~s@" `(,ui))))
+         (auth (lists:flatten (io_lib:format "~s~s~s" `(,ui ,ho ,po))))
+         (auth (if (== "" auth) auth (io_lib:format "//~s" `(,auth))))
+         (fr (if (== #"" fr) fr (io_lib:format "#~s" `(,fr))))
+         (qu (if (== #"" qu) qu (io_lib:format "?~s" `(,qu)))))
+     (io_lib:format "~s:~s~s~s~s" `(,sc ,auth ,pa ,qu ,fr)))))
 
 ;;; uri_string library wrappers
 
