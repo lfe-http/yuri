@@ -1,6 +1,6 @@
 (defmodule yuri.version
   (export
-   (get 0)
+   (get 0) (get 1)
    (all 0)))
 
 (defun get ()
