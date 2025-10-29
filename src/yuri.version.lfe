@@ -17,7 +17,7 @@
   `#(architecture ,(erlang:system_info 'system_architecture)))
 
 (defun version+name (app-name)
-  `#(,app-name ,(get app-name)))
+  `#(,app-name ,(yuri.version:get app-name)))
 
 (defun versions-rebar ()
   `(,(version+name 'rebar)
