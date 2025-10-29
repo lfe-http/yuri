@@ -1,4 +1,5 @@
 (defmodule yuri.version
+  (compile #(no_auto_import (get 1)))
   (export
    (get 0) (get 1)
    (all 0)))
