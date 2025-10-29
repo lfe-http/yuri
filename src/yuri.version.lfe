@@ -1,11 +1,11 @@
 (defmodule yuri.version
-  (compile #(no_auto_import (get 1)))
+;;   (compile #(no_auto_import (get 1)))
   (export
    (get 0) (get 1)
    (all 0)))
 
 (defun get ()
-  (get 'yuri))
+  (yuri.version:get 'yuri))
 
 (defun get (app-name)
   (application:load app-name)
